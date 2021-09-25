@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="monitoring_activities.phonegap23.dey"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+    
+
+    <!-- uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" /-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>  
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /-->   
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+   
+    <!--uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /-->
+
+    <application android:icon="@drawable/icono_spy"    
+        android:label="Trackatrack" 
+        android:allowBackup="true"
+        android:largeHeap="true">
+        <uses-library android:name="com.google.android.maps" />
+        <receiver
+			android:name=".BootCompleted"
+			android:enabled="true" >
+			<intent-filter>
+    			<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+    
+        <activity android:alwaysRetainTaskState="true" 
+            android:excludeFromRecents="false"
+            
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".MyPhoneGapActivity"
+            android:label="Trackatrack" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

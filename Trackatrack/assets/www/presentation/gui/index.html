@@ -1,0 +1,1374 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+  	<meta http-equiv="Content-type" content="text/html; charset=utf-8;"/>
+
+  	<title>TRACKATRACK-Monitoring Activities</title>
+  	<link rel="stylesheet" href="../libs/jquery.mobile/jquery.mobile-1.1.0.min.css"/>
+  	<link rel="stylesheet" href="index.css" />
+	<link rel="stylesheet" href="../libs/jquery.mobile/jquery.mobile.datebox.min.css" />   
+	 
+	<!--script src="http://192.168.0.192:8080/target/target-script-min.js#anonymous"></script-->
+	
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4_9Rz4dFSVzpSZ3bSBFMKHN6fpl5wNko&amp;sensor=true"></script>
+	<script src="../libs/jquery.mobile/jquery-1.7.2.min"></script>
+	<script src="../libs/jquery.mobile/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/phonegap/cordova-2.3.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/controller/index.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/controller/myScript.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/controller/controller.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/google.maps/gmaps.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/jquery.mobile/jquery.mobile.datebox.calbox.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/graphs/canvasjs.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/jquery.mobile/jquery.localize.js"></script>
+
+  </head>
+  
+  <body id="stage" class="theme">
+  	<div data-role="page" id="page-home" class="type-interior" data-theme="b">
+		<div data-role="header" data-theme="b">
+			<h1><i><big>TRACKATRACK</big></i></h1>
+	 		<a href="#" data-icon="home" data-iconpos="notext" id="intro" class="ui-btn-left">intro</a>
+	 		<a href="#" data-icon="delete" data-iconpos="notext" id="exit" class="ui-btn-right">exit</a>
+		</div>
+		
+		<div data-role="content" class="fondo">
+			<img id="icono_fondo" class="icono_fondo" src="../images/icono_spy_stop.png">
+			<center><h2 id="lbl_init" class="lbl_init"></h2></center>
+			<div data-role="fieldcontain">	
+				<h4 id="lbl_info" data-localize="lbl_info" class="help">This app will collect personal data on your phone</h4>
+			</div>
+	
+			<div data-role="fieldcontain">
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="b">
+					<h3 data-localize="click-title-set">Settings</h3>
+					<ul data-role="listview" data-theme="b" data-dividertheme="a">
+						<li id="listdivider" data-role="list-divider"> Monitoring activities</li>
+						<li><a id="click-adddata" data-localize="click-adddata">Add data</a></li>
+						<li><a id="click-dataset" data-localize="click-dataset">Dataset</a></li>
+						<li><a id="click-perfomance" data-localize="click-perfomance">Perfomance</a></li>
+					</ul>
+				</div>
+	
+				<div class="api-div" id="api-adddata">
+					<h2 data-localize="adddata-title"><strong>Add data</strong></h2>
+					<h4 id="lbl_user_success" data-localize="lbl_user_success" class="help">Enter your personal details</h4>
+					<h4 id="lbl_user_error" data-localize="lbl_user_error">All fields are obligatory</h4>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 id="lbl_name" data-localize="lbl_name" class="addLabel">Name:</h5> 
+						</div>
+						<div  class="ui-block-b">
+							<div class="addTextBox">
+							<input type="text" data-localize="username" name="username" id="username" placeholder="UserName" />
+							</div>
+	            		</div>
+	            	</div>
+	            	<div class="ui-grid-a">
+						<div  class="ui-block-a"> 
+							<h5 id="lbl_age" data-localize="lbl_age" class="addLabel">Age:</h5>
+						</div>
+						<div  class="ui-block-b">
+							<div class="addTextBox">
+	            				<input type="number" maxlength="2" data-localize="userage" name="age" id="userage" placeholder="UserAge" />
+	            			</div>
+	            		</div>
+	            	</div>
+	            	<div class="ui-grid-a">
+						<div  class="ui-block-a"> 
+							<h5 id="lbl_profession" data-localize="lbl_profession" class="addLabel">Occupation:</h5>
+						</div>
+						<div  class="ui-block-b">
+							<div class="addTextBox">
+	            				<input type="text" class="addTextBox" data-localize="userprofession" name="userprofession" id="userprofession" placeholder="UserOccupation" />
+	            			</div>
+	            		</div>
+	        		</div>
+	        		<div class="ui-grid-a">
+						<div  class="ui-block-a">
+							<div class="ui-grid-a"> 
+								<div  class="ui-block-a">
+									<h5 id="lbl_server" data-localize="lbl_server" class="addLabelServer">Server:</h5>
+								</div>
+								<div  class="ui-block-b">
+									<img id="icono_help_server" class="helpServer" src="../images/icono_help.png">
+								</div>
+							</div>
+						</div>
+						<div  class="ui-block-b">
+							<div class="addTextBox">
+	            				<input type="text" class="addTextBox" name="userserver" id="userserver" placeholder="trackatrack.esy.es" />
+	            			</div>
+	            		</div>
+	        		</div>
+	        		<center><div id="api-btn_save_data" data-localize="api-btn_save_data" class="buttonSave" data-role="button">Save</div></center>
+				</div>
+				
+				<div class="api-div" id="api-dataset">
+					<h2 data-localize="dataset-title"><strong>Dataset</strong></h2>
+					<h4 data-localize="lbl-dataset" class="help">What data do you want to be collected?</h4>
+					<center><div class="setCheck">
+	         			<input type="checkbox" name="checkbox-accelerometer" id="checkbox-accelerometer" value="accelerometer" checked="checked" />
+	         			<label data-localize="checkbox-accelerometer" for="checkbox-accelerometer">Accelerometer</label>
+	         		</div>
+	         		<div class="setCheck">
+	         			<input type="checkbox" name="checkbox-compass" id="checkbox-compass" value="compass" checked="checked" />
+	         			<label data-localize="checkbox-compass" for="checkbox-compass">Compass</label>
+	         		</div>
+	         		<div class="setCheck">
+	         			<input type="checkbox" name="checkbox-gps" id="checkbox-gps" value="gps" checked="checked" />
+	         			<label data-localize="checkbox-gps" for="checkbox-gps">GPS</label>
+	         		</div>
+	         		<div class="setCheck">
+	         			<input type="checkbox" name="checkbox-activities" id="checkbox-activities" value="activities" checked="checked" />
+	         			<label data-localize="checkbox-activities" for="checkbox-activities">Activities</label>
+					</div></center>
+	         		<h4 id="info_set" data-localize="info_set" class="infoHide">This app will not collect any data. You should activate one of them</h4>
+				</div>
+				
+				<div class="api-div" id="api-perfomance">
+					<h2 data-localize="perfomance-title"><strong>Perfomance</strong></h2>
+					<h4 data-localize="lbl-perfomance"class="help">What perfomance do you want?</h4>
+					<center><div class="setCheck">
+						<fieldset data-role="controlgroup">
+							<form name="perfomance" id="list-perfomance">
+	    						<input type="radio" name="perf" id="perf-low" value="1" checked="checked">
+	    						<label data-localize="perf-low" for="perf-low">Low</label> 
+	    						<input type="radio" name="perf" id="perf-medium" value="2">
+	    						<label data-localize="perf-medium"  for="perf-medium">Medium</label> 
+	    						<input type="radio" name="perf" id="perf-high" value="3">
+	    						<label data-localize="perf-high" for="perf-high">High</label> 
+	    						<input type="radio" name="perf" id="perf-manual" value="4">
+	    						<label data-localize="perf-manual" for="perf-manual">Manual</label> 
+							</form>
+						</fieldset>
+					</div>
+					<div id="panelPerfBody">
+						<div class="ui-grid-a">
+							<div class="ui-block-a"> 
+								<h5 data-localize="lbl-perf-accelerometer" class="addLabelPerf">Accelerometer:</h5> 
+							</div>
+							<div class="ui-block-b">
+								<select id="perf-manual-accel">
+									<option value="0.25">0.25 seg</option>
+									<option value="0.5">0.5 seg</option>
+									<option value="1">1 seg</option>
+									<option value="1.5" selected="selected">1.5 seg</option>
+									<option value="2">2 seg</option> 
+									<option value="2.5">2.5 seg</option>
+									<option value="3">3 seg</option>
+									<option value="4">4 seg</option>
+								</select>
+							</div>
+						</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"> 
+								<h5 data-localize="lbl-perf-compass" class="addLabelPerf">Compass:</h5> 
+							</div>
+							<div class="ui-block-b">
+								<select id="perf-manual-comp">
+									<option value="0.25">0.25 seg</option>
+									<option value="0.5">0.5 seg</option>
+									<option value="1">1 seg</option>
+									<option value="1.5">1.5 seg</option>
+									<option value="2">2 seg</option> 
+									<option value="2.5" selected="selected">2.5 seg</option>
+									<option value="3">3 seg</option>
+									<option value="4">4 seg</option>
+									<option value="5">5 seg</option>
+								</select>
+							</div>
+						</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"> 
+								<h5 data-localize="lbl-perf-gps" class="addLabelPerf">GPS:</h5> 
+							</div>
+							<div class="ui-block-b">
+								<select id="perf-manual-gps">
+									<option data-localize="perf-manual-gps-walking" value="walking" selected="selected">Walking</option>
+									<option data-localize="perf-manual-gps-bycicling" value="bicycling">Cycling</option>
+									<option data-localize="perf-manual-gps-driving" value="driving">Driving</option>
+									<option data-localize="perf-manual-gps-advanced" value="advanced">Advanced</option>
+								</select>					
+							</div>
+						</div>
+						<div id="panelGpsBody">
+							<div class="ui-grid-b">
+								<div class="ui-block-a">	
+									<img id="icono_help_dist" src="../images/icono_help.png">
+								</div>
+								<div class="ui-block-b">
+									<h5 data-localize="lbl-perf-gps-distance" class="addLabelPerfGps">Distance:</h5> 
+								</div>
+								<div class="ui-block-c">
+									<div class="perfManualGps">
+										<select id="perf-manual-geoDis">
+											<option value="20">20 m</option>
+											<option value="50">50 m</option>
+											<option value="100">100 m</option>
+											<option value="200">200 m</option>
+											<option value="500" selected="selected">500 m</option>
+											<option value="750">750 m</option>
+											<option value="1000">1 km</option>
+											<option value="2500">2.5 km</option>
+											<option value="5000">5 km</option> 
+											<option value="10000">10 km</option> 
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-b">
+								<div class="ui-block-a">
+									<img id="icono_help_max" src="../images/icono_help.png">
+								</div>
+								<div class="ui-block-b">
+									<h5 data-localize="lbl-perf-gps-age" class="addLabelPerfGps">Max age:</h5> 
+								</div>
+								<div class="ui-block-c">
+									<div class="perfManualGps">
+										<select id="perf-manual-geoMax">
+											<option value="2">2 seg</option>
+											<option value="3" selected="selected">3 seg</option>
+											<option value="5">5 seg</option>
+											<option value="10">10 seg</option>
+											<option value="15">15 seg</option>
+											<option value="20">20 seg</option>
+											<option value="30">30 seg</option> 
+											<option value="60">60 seg</option> 
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-b">
+								<div class="ui-block-a">
+									<img id="icono_help_time" src="../images/icono_help.png">
+								</div>
+								<div class="ui-block-b"> 
+									<h5 data-localize="lbl-perf-gps-time" class="addLabelPerfGps">Time out:</h5> 
+								</div>
+								<div class="ui-block-c">
+									<div class="perfManualGps">
+										<select id="perf-manual-geoTim">
+											<option value="0" selected="selected">No</option>
+											<option value="5">5 seg</option>
+											<option value="8">8 seg</option>
+											<option value="10">10 seg</option>
+											<option value="15">15 seg</option>
+											<option value="20">20 seg</option>
+											<option value="30">30 seg</option>
+											<option value="60">60 seg</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<img id="icono_help_acc" src="../images/icono_help.png">
+								</div>
+								<div class="ui-block-b">
+									<div class="checkPerfGps">
+										<input type="checkbox" name="checkbox-gpsPerf" id="checkbox-gpsPerfAcc" checked="checked"/>
+	         							<label data-localize="lbl-perf-gps-accuracy" for="checkbox-gpsPerfAcc">High accuracy</label>
+	         						</div>
+	         					</div>
+	         				</div>
+	         			</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"> 
+								<h5 data-localize="lbl-perf-activities" class="addLabelPerf">Activities:</h5> 
+							</div>
+							<div class="ui-block-b">
+								<select id="perf-manual-app">
+									<option value="1">1 seg</option>
+									<option value="2">2 seg</option>
+									<option value="3">3 seg</option>
+									<option value="4" selected="selected">4 seg</option>
+									<option value="5">5 seg</option>
+									<option value="7">7 seg</option> 
+									<option value="10">10 seg</option>
+									<option value="15">15 seg</option>
+								</select>
+							</div>
+						</div>
+					</div></center>
+					<h4 id="info_perf" data-localize="info_perf" class="info">This app will control the perfomance</h4>
+				</div>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="b">
+					<h3 data-localize="click-title-graph">Graphs</h3>
+					<ul data-role="listview" data-theme="b" data-dividertheme="a">
+						<li id="listdivider" data-role="list-divider"> Monitoring activities</li>
+						<li><a data-localize="click-viewData" id="click-viewData">General view data</a></li>
+						<li><a data-localize="click-accelerometer" id="click-accelerometer">Accelerometer</a></li>
+						<li><a data-localize="click-compass" id="click-compass">Compass</a></li>
+						<li><a id="click-geolocation">GPS</a></li>
+						<li><a data-localize="click-activities" id="click-activities">Mobile activities</a></li>
+					</ul>
+				</div>
+			
+				<div class="api-div" id="api-viewData">
+					<h2 data-localize="viewDataUser-title"><strong>User details</strong></h2>
+					<h4 id="info_viewUser" data-localize="lbl-viewUser" class="help"> Table summary of user details</h4>
+					<center><table border=1>
+						<tr>
+							<td data-localize="table-nameUser" class="table_form_title_user">User</td>
+							<td data-localize="table-ageUser" class="table_form_title_user">Age</td>
+							<td data-localize="table-professionUser" class="table_form_title_user">Occupation</td>
+						</tr>
+						
+						<tr>
+							<td id="table_name" class="table_form_user">-</td>
+							<td id="table_age" class="table_form_user">-</td>
+							<td id="table_profession" class="table_form_user">-</td>
+						</tr>
+					</table>
+					
+					<table border=1>
+						<tr>
+							<td data-localize="table-mobileUser" class="table_form_title_user">Mobile</td>
+							<td data-localize="table-plataformUser" class="table_form_title_user">Platform</td>
+							<td data-localize="table-versionUser" class="table_form_title_user">Version</td>
+						</tr>
+						<tr>
+							<td id="table_mobile" class="table_form_user">-</td>
+							<td id="table_plataform" class="table_form_user">-</td>
+							<td id="table_version" class="table_form_user">-</td>
+						</tr>
+					</table></center>
+					
+					<h2 data-localize="viewDataMobile-title"><strong>Device mobile</strong></h2>
+					<h4 data-localize="lbl-viewMobile" id="info_viewData" class="help"> Table summary of all data collected</h4>
+					<center><table border=1>
+						<tr>
+							<td class="table_form_title_device"><img src="../images/icono_device.png"></td>
+							<td class="table_form_title_device"><img src="../images/icono_activo.png"></td>
+							<td class="table_form_title_device"><img src="../images/icono_run.png"></td>
+							<td class="table_form_title_device"><img src="../images/icono_data.png"></td>
+							<td class="table_form_title_device"><img src="../images/icono_frequency.png"></td>
+							<td class="table_form_title_device"><img src="../images/icono_err.png"></td>
+						</tr>
+						<tr>
+							<td rowspan="3" class="table_form_device"><img src="../images/icono_accel.png"></td>
+							<td class="table_form_device"><img id="table_activatedAccel" src="../images/icono_tick.png"></td>
+							<td class="table_form_device"><img id="table_runningAccel" src="../images/icono_stop.png"></td>
+							<td id="table_dataAccel" class="table_form_device">-</td>
+							<td id="table_frequencyAccel" class="table_form_device">-</td>
+							<td class="table_form_device"><img id="table_errorAccel" src=""></td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateIniAccel" class="table_form_date">-</td>
+								<!--center><table border="0" class="table_form_date">
+									<tr><td><img class="img_date" src="../images/icono_date1.png"></td>
+									<td id="table_dateIniAccel" class="table_form_date">-</td></tr>
+								</table></center>
+							</td-->
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateEndAccel" class="table_form_date">-</td>
+						</tr>
+						
+						<tr>
+							<td rowspan="3" class="table_form_device"><img src="../images/icono_comp.png"></td>
+							<td class="table_form_device"><img id="table_activatedComp" src="../images/icono_tick.png"></td>
+							<td class="table_form_device"><img id="table_runningComp" src="../images/icono_stop.png"></td>
+							<td id="table_dataComp" class="table_form_device">-</td>
+							<td id="table_frequencyComp" class="table_form_device">-</td>
+							<td class="table_form_device"><img id="table_errorComp" src=""></td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateIniComp" class="table_form_date">-</td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateEndComp" class="table_form_date">-</td>
+						</tr>
+						
+						<tr>
+							<td rowspan="3" class="table_form_device"><img src="../images/icono_gps.png"></td>
+							<td class="table_form_device"><img id="table_activatedGeo" src="../images/icono_tick.png"></td>
+							<td class="table_form_device"><img id="table_runningGeo" src="../images/icono_stop.png"></td>
+							<td id="table_dataGeo" class="table_form_device">-</td>
+							<td id="table_frequencyGeo" class="table_form_device">-</td>
+							<td class="table_form_device"><img id="table_errorGeo" src=""></td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateIniGeo" class="table_form_date">-</td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateEndGeo" class="table_form_date">-</td>
+						</tr>
+						
+						<tr>
+							<td rowspan="3" class="table_form_device"><img src="../images/icono_app.png"></td>
+							<td class="table_form_device"><img id="table_activatedApp" src="../images/icono_tick.png"></td>
+							<td class="table_form_device"><img id="table_runningApp" src="../images/icono_stop.png"></td>
+							<td id="table_dataApp" class="table_form_device">-</td>
+							<td id="table_frequencyApp" class="table_form_device">-</td>
+							<td class="table_form_device"><img id="table_errorApp" src=""></td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateIniApp" class="table_form_date">-</td>
+						</tr>
+						<tr>
+							<td colspan="5" id="table_dateEndApp" class="table_form_date">-</td>						
+						</tr>
+					</table></center>
+				</div>
+				
+				<div class="api-div" id="api-accelerometer">
+					<h2 data-localize="accelerometer-title"><strong>Accelerometer</strong></h2>
+					<h4 data-localize="lbl-accelerometer" id="info_accel" class="help"> Phisical activity using data of accelerometer</h4>
+					
+					<center><h3 data-localize="accelerometer-data" class="h3Title">DATA</h3></center>
+					
+					<center><div class="selectDates">
+						<fieldset data-role="controlgroup">
+							<form id="list-date">
+								<input type="radio" name="date" id="dateAccel-fromto" checked="checked">
+		    					<label data-localize="dateAccel-fromto" for="dateAccel-fromto">Data from-to</label>
+		    					<input type="radio" name="date" id="dateAccel-last">
+		    					<label data-localize="dateAccel-last" for="dateAccel-last">Data per day</label>
+							</form>
+						</fieldset>
+					</div></center>
+					
+					<center><h3 data-localize="accelerometer-graph" class="h3Title">GRAPH</h3>
+					<div class="coord_button">
+						<select id="listCoordinate">
+		  					<option selected="selected">X-Y-Z</option>
+		  					<option>X</option>
+		  					<option>Y</option>
+		  					<option>Z</option>
+		  					<option>X-Y</option>
+		  					<option>X-Z</option>
+		  					<option>Y-Z</option>
+						</select>
+					</div></center>
+					<center><div class="ui-grid-b">
+						<div class="ui-block-a">
+							<h4 class="h4CoordX"><strong>X</strong></h4>
+						</div>
+						<div class="ui-block-b">
+							<h4 class="h4CoordY"><strong>Y</strong></h4>
+						</div>
+						<div class="ui-block-c">
+							<h4 class="h4CoordZ"><strong>Z</strong></h4>
+						</div>
+					</div></center>
+					
+					<div id="panelDateFTBodyAccel">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<center><table class="dateBox">
+									<tr>
+										<td><img class="img_date" src="../images/icono_date1.png"></td>
+										<td><h3 id="fromAccel" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateFromAccel" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+									<tr> 
+										<td><img class="img_date" src="../images/icono_date2.png"></td>
+										<td><h3 id="toAccel" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateToAccel" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+							<div class="ui-block-b">
+								<center><table class="dateBox">
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourFromAccel" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minFromAccel" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourToAccel" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minToAccel" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+						</div>	
+					</div>
+					
+					<center><div id="panelDateLBodyAccel" class="invisible">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="date_button">
+									<select id="listHourAccel" name="listHourAccel">
+										<option data-localize="listHourAccel" value="-1" selected="selected">All hours</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div class="date_button">
+									<select id="listDateAccel" name="listDateAccel">
+										<option data-localize="listDateAccel" value="-1" selected="selected">Everyday</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div></center>
+					
+					
+					<center><div class="canvasTable"><table class="canvasTable">
+						<tr>
+							<td rowspan="2"><center><img id="image_izqA" class="imageGraph" src="../images/flecha2.PNG"></center></td>
+							<td></td>
+							<td></td>
+							<td><center><div id="transp_buttonA1" value="1" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA2" value="2" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA3" value="3" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA4" value="4" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA5" value="5" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA6" value="6" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonA7" value="7" class="transp_button" data-role="button"></div></center></td>
+							<td></td>
+							<td></td>
+							<td rowspan="2"><center><img id="image_derA" class="imageGraph" src="../images/flecha3.PNG"></center></td>
+						</tr>
+						<tr>
+							<td colspan="11"><canvas id="canvasAccelerometer" class="canvasGraph"></canvas></td>
+						</tr>
+					</table></div>
+					<div id="btn_up_accel" class="button btn_up"><center><img class="img_up" src="../images/flecha1.PNG"><center></div>
+					<h5 id="infoDateAccel"></h5></center>
+						
+				</div>
+				<div class="api-div" id="api-compass">
+					<h2 data-localize="compass-title"><strong>Compass</strong></h2>
+					<h4 data-localize="lbl-compass" id="info_comp" class="help"> Mobility using data of compass</h4>
+					
+					<center><h3 data-localize="compass-data" class="h3Title">DATA</h3></center>
+					
+					<center><div class="selectDates">
+						<fieldset data-role="controlgroup">
+							<form id="list-date">
+								<input type="radio" name="date" id="dateComp-fromto" checked="checked">
+		    					<label data-localize="dateComp-fromto" for="dateComp-fromto">Date from-to</label>
+		    					<input type="radio" name="date" id="dateComp-last">
+		    					<label data-localize="dateComp-last" for="dateComp-last">Date per day</label>
+							</form>
+						</fieldset>
+					</div></center>
+					
+					<center><h3 data-localize="compass-graph" class="h3Title">GRAPH</h3>
+					<div class="coord_button">
+						<select id="listImage" name="listImage">
+		  					<option data-localize="listImage-graph">Graph</option>
+		  					<option data-localize="listImage-compass">Compass</option>
+						</select>
+					</div>
+					
+					<h4 data-localize="lbl-compass-degrees" class="h4Comp">Degrees</h4></center>
+					
+					<div id="panelDateFTBodyComp">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<center><table class="dateBox">
+									<tr>
+										<td><img class="img_date" src="../images/icono_date1.png"></td>
+										<td><h3 id="fromComp" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateFromComp" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+									<tr> 
+										<td><img class="img_date" src="../images/icono_date2.png"></td>
+										<td><h3 id="toComp" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateToComp" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+							<div class="ui-block-b">
+								<center><table class="dateBox">
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourFromComp" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minFromComp" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourToComp" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minToComp" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+						</div>	
+					</div>
+					
+					<center><div id="panelDateLBodyComp" class="invisible">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="date_button">
+									<select id="listHourComp" name="listHourComp">
+										<option data-localize="listHourComp" value="-1" selected="selected">All hours</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div class="date_button">
+									<select id="listDateComp" name="listDateComp">
+										<option data-localize="listDateComp" value="-1" selected="selected">Everyday</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div></center>
+					
+					<div id="btn_zoom" class="button btnZoom">
+						<img id="icono_zoom" class="iconoZoom" src="">
+					</div>
+					
+					<center><div class="canvasTable"><table class="canvasTable">
+						<tr>
+							<td rowspan="2"><center><img id="image_izqC" class="imageGraph" src="../images/flecha2.PNG"></center></td>
+							<td></td>
+							<td></td>
+							<td><center><div id="transp_buttonC1" value="1" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC2" value="2" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC3" value="3" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC4" value="4" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC5" value="5" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC6" value="6" class="transp_button" data-role="button"></div></center></td>
+							<td><center><div id="transp_buttonC7" value="7" class="transp_button" data-role="button"></div></center></td>
+							<td></td>
+							<td></td>
+							<td rowspan="2"><center><img id="image_derC" class="imageGraph" src="../images/flecha3.PNG"></center></td>
+						</tr>
+						<tr>
+							<td colspan="11"><canvas id="canvasCompass" class="canvasGraph"></canvas></td>
+						</td>
+					</table></div>
+					<div id="btn_up_comp" class="button btn_up"><center><img class="img_up" src="../images/flecha1.PNG"><center></div>
+					<h5 id="infoDateComp"></h5></center> 	 	
+		    	</div>
+		    	
+		    	<div class="api-div" id="api-geolocation">
+					<h2><strong>GPS</strong></h2>
+					<h4 data-localize="lbl-geolocation" id="info_geo" class="help"> Movements using data of GPS</h4>
+					
+					<center><h3 data-localize="geolocation-data" class="h3Title">DATA</h3></center>
+					
+					<center><div class="selectDates">
+						<fieldset data-role="controlgroup">
+							<form id="list-date">
+								<input type="radio" name="date" id="dateGeo-fromto" checked="checked">
+		    					<label data-localize="dateGeo-fromto" for="dateGeo-fromto">Dates from-to</label>
+		    					<input type="radio" name="date" id="dateGeo-last">
+		    					<label data-localize="dateGeo-last" for="dateGeo-last">Dates per day</label>
+							</form>
+						</fieldset>
+					</div></center>
+					
+					<center><h3 data-localize="geolocation-map" class="h3Title">MAP</h3>
+					
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<div class="date_button">
+		    					<select id="travel_mode">
+		    						<option data-localize="travel_mode-points" value="points" selected="selected">Points</option>
+		        					<option data-localize="travel_mode-route" value="route">Route</option>
+		        					<option data-localize="travel_mode-area" value="area">Area</option>
+		    					</select>
+		    				</div>
+		    			</div>
+		    			<div class="ui-block-b">
+		    				<div id="panelPointsGeo" class="date_button">
+		    					<select id="sistem_type_points">
+		    						<option data-localize="sistem_type_points-all" value="all" selected="selected">All data</option>
+		    						<option data-localize="sistem_type_points-low" value="filter1">Low filter</option>
+		        					<option data-localize="sistem_type_points-median" value="filter2">Medium filter</option>
+		        					<option data-localize="sistem_type_points-high" value="filter3">High filter</option>
+		    					</select>
+		    				</div>
+		    				<div id="panelRouteGeo" class="date_button invisible">
+		    					<select id="sistem_type_route">
+		    						<option data-localize="sistem_type_route-line" value="line" selected="selected">Line</option>
+									<option data-localize="sistem_type_route-driving" value="driving">Driving</option>
+		        					<option data-localize="sistem_type_route-bicycling" value="bicycling">Cycling</option>
+		        					<option data-localize="sistem_type_route-walking" value="walking">Walking</option>
+		    					</select>
+		    				</div>
+		    				<div id="panelAreaGeo" class="date_button invisible">
+		    					<select id="sistem_type_area">
+		    						<option data-localize="sistem_type_area-normal" value="normal" selected="selected">Normal</option>
+		        					<option data-localize="sistem_type_area-polygon" value="polygon">Polygon</option>
+		        					<option data-localize="sistem_type_area-clusters" value="clusters">Clusters</option>
+		    					</select>
+		    				</div>
+		    			</div>
+					</div>
+					<div id="panelGpsPoints">
+						<div class="ui-grid-b">
+							<div class="ui-block-a">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<img src="../images/icono_start_marker.png">	
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-start">Start</h5>
+									</div>
+								</div>
+							</div>	
+							<div class="ui-block-b">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<img src="../images/icono_marker.png">	
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-point">Point</h5>
+									</div>
+								</div>
+							</div>
+							<div class="ui-block-c">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<img src="../images/icono_end_marker.png">	
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-end">End</h5>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div id="panelGpsRoute">
+						<center><h4 data-localize="lblGeo-route" class="h4Route">Route</h4><center>
+					</div>
+					<div id="panelGpsArea">
+						<div class="ui-grid-b">
+							<div class="ui-block-a">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<img src="../images/icono_clusterBlue.png">	
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-most">Most visited</h5>
+									</div>
+								</div>
+							</div>	
+							<div class="ui-block-b">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<div class="ui-grid-b">
+											<div class="ui-block-a">
+												<img src="../images/icono_clusterGreen.png">
+											</div>	
+											<div class="ui-block-b">
+												<img src="../images/icono_clusterYellow.png">
+											</div>
+											<div class="ui-block-c">
+												<img src="../images/icono_clusterPurple.png">
+											</div>
+										</div>
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-frequent">Frequent</h5>
+									</div>
+								</div>
+							</div>
+							<div class="ui-block-c">
+								<div class="ui-grid-a">
+									<div class="ui-block-a">
+										<img src="../images/icono_clusterRed.png">	
+									</div>
+									<div class="ui-block-b">
+										<h5 data-localize="lblGeo-less">Least visited</h5>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+					
+					<div id="panelDateFTBodyGeo">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<center><table class="dateBox">
+									<tr>
+										<td><img class="img_date" src="../images/icono_date1.png"></td>
+										<td><h3 id="fromGeo" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateFromGeo" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+									<tr> 
+										<td><img class="img_date" src="../images/icono_date2.png"></td>
+										<td><h3 id="toGeo" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateToGeo" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+							<div class="ui-block-b">
+								<center><table class="dateBox">
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourFromGeo" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minFromGeo" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourToGeo" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minToGeo" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+						</div>	
+					</div>
+					
+					<center><div id="panelDateLBodyGeo" class="invisible">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="date_button">
+									<select id="listHourGeo" name="listHourGeo">
+										<option data-localize="listHourGeo" value="-1" selected="selected">All hours</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div class="date_button">
+									<select id="listDateGeo" name="listDateGeo">
+										<option data-localize="listDateGeo" value="-1" selected="selected">Everyday</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div></center>
+					
+					<center><div id="overlay" class="overlay">
+						<div data-role="header" data-theme="b">
+							<div id="id_title_gps" class="h5OverlayTitle"></div>
+							<a href="#" data-icon="info" data-iconpos="notext" id="id_info_gps" class="ui-btn-left">intro</a>
+					 		<a href="#" data-icon="delete" data-iconpos="notext" id="id_exit_gps" class="ui-btn-right">exit</a>
+						</div>
+						<div id="id_lat_gps" class="h5Overlay"></div>
+						<div id="id_lng_gps" class="h5Overlay"></div>
+						<div id="id_alt_gps" class="h5Overlay"></div>
+						<div id="id_acc_gps" class="h5Overlay"></div>
+						<div id="id_spe_gps" class="h5Overlay"></div>
+						<div id="id_dis_gps" class="h5Overlay"></div>
+						<div id="id_dat_gps" class="h5Overlay"></div>
+					</div>
+					<div id="overlay2" class="overlay2">
+						<div data-role="header" data-theme="b">
+							<div id="id_title_gps2" class="h5OverlayTitle"></div>
+							<a href="#" data-icon="info" data-iconpos="notext" id="id_info_gps2" class="ui-btn-left">intro</a>
+							<a href="#" data-icon="delete" data-iconpos="notext" id="id_exit_gps2" class="ui-btn-right">exit</a>
+						</div>
+						<div id="id_lat_gps2" class="h5Overlay"></div>
+						<div id="id_lng_gps2" class="h5Overlay"></div>
+						<div id="id_speMax_gps2" class="h5Overlay"></div>
+						<div id="id_speMed_gps2" class="h5Overlay"></div>
+						<div id="id_dis_gps2" class="h5Overlay"></div>
+						<div id="id_mar_gps2" class="h5Overlay"></div>
+					</div></center>
+					
+		   			<div class="portMap" id="mimapa"></div> 
+		   			<div id="btn_up_geo" class="button btn_up"><center><img class="img_up" src="../images/flecha1.PNG"><center></div>
+		   			<h5 id="infoDateGeo"></h5></center>						
+				</div>
+				
+				<div class="api-div" id="api-activities">
+					<h2 data-localize="activities-title"><strong>Mobile activities</strong></h2>
+					<h4 data-localize="lbl-activities" id="info_app" class="help"> Information about executed apps</h4>
+				
+					<center><h3 data-localize="activities-data" class="h3Title">DATA</h3></center>
+					
+					<center><div class="selectDates">
+						<fieldset data-role="controlgroup">
+							<form id="list-date">
+								<input type="radio" name="date" id="dateApp-fromto" checked="checked">
+		    					<label data-localize="dateApp-fromto" for="dateApp-fromto">Data from-to</label>
+		    					<input type="radio" name="date" id="dateApp-last">
+		    					<label data-localize="dateApp-last" for="dateApp-last">Data per day</label>
+							</form>
+						</fieldset>
+					</div></center>
+					
+					<center><h3 data-localize="activities-graph" class="h3Title">GRAPH</h3>
+			
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<div class="date_button">
+		    					<select id="listModeApp">
+		    						<option data-localize="listModeApp-tracing" value="Tracing" selected="selected">Tracing</option>
+		  							<option data-localize="listModeApp-summary" value="Summary">Summary</option>
+		    					</select>
+		    				</div>
+		    			</div>
+		    			<div class="ui-block-b">
+		    				<div id="panelModeAppTrac" class="date_button">
+		    					<select id="listModeAppTrac">
+		    						<option data-localize="listModeAppTrac-table" value="Table" selected="selected">Table</option>
+		    						<option data-localize="listModeAppTrac-graph"value="Graph">Graph</option>
+		    						<option data-localize="listModeAppTrac-all" value="All">All data</option>
+		    					</select>
+		    				</div>
+		    				<div id="panelModeAppSum" class="date_button invisible">
+		    					<select id="listModeAppSum">
+									<option data-localize="listModeAppSum-table" value="Table" selected="selected">Table</option>
+		        					<option data-localize="listModeAppSum-bar" value="Bar">Bar</option>
+		        					<option data-localize="listModeAppSum-pie" value="Pie">Pie</option>
+		        					<option data-localize="listModeAppSum-graph" value="Rows">Graph</option>
+		    					</select>
+		    				</div>
+		    			</div>
+					</div>
+			
+					<div id="panelDateFTBodyApp">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<center><table class="dateBox">
+									<tr>
+										<td><img class="img_date" src="../images/icono_date1.png"></td>
+										<td><h3 id="fromApp" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateFromApp" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+									<tr> 
+										<td><img class="img_date" src="../images/icono_date2.png"></td>
+										<td><h3 id="toApp" class="h3Date">-</h3></td>
+										<td>
+											<div class="date_box">
+												<input readonly="readonly" id="dateToApp" type="date" data-role="datebox"/>
+											</div>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+							<div class="ui-block-b">
+								<center><table class="dateBox">
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourFromApp" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minFromApp" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="time_box">
+												<input id="hourToApp" type="number" maxlength="2" min="0" max="23"/>
+											</div>
+										</td>
+										<td>
+											<h3 class="h3Hour">h</h3>
+										</td>
+										<td>
+											<div class="time_box">
+												<input id="minToApp" type="number" maxlength="2" min="0" max="59"/>
+											</div>
+										</td>
+										<td> 
+											<h3 class="h3Hour">m</h3>
+										</td>
+									</tr>
+								</table></center>
+							</div>
+						</div>	
+					</div>
+					
+					<center><div id="panelDateLBodyApp" class="invisible">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="date_button">
+									<select id="listHourApp" name="listHourApp">
+										<option data-localize="listHourApp" value="-1" selected="selected">All hours</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<div class="date_button">
+									<select id="listDateApp" name="listDateApp">
+										<option data-localize="listDateApp" value="-1" selected="selected">Everyday</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div></center>
+			
+					<table id="table_summaryApp" border="1"></table>
+					<div id="graphApp" class="invisible graph"></div>
+					<div id="graphAppAux" class="invisible graph"></div>
+					<div id="btn_up_app" class="button btn_up"><center><img class="img_up" src="../images/flecha1.PNG"><center></div>
+					<h5 id="infoDateApp"></h5></center>
+				</div>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="b">
+					<h3 data-localize="click-title-synchronize">Synchronise</h3>
+					<ul data-role="listview" data-theme="b" data-dividertheme="a">
+						<li id="listdivider" data-role="list-divider"> Monitoring activities</li>
+						<li><a data-localize="click-title-set" id="click-setting">Settings</a></li>
+						<li><a data-localize="click-server" id="click-server">Data on the server</a></li>
+					</ul>
+				</div>		
+			
+				<div class="api-div" id="api-setting">
+					<h2 data-localize="sinchronize-setting-title"><strong>Settings</strong></h2>
+					<h4 data-localize="lbl_synchronizeSetting" id="info_sincSet" class="help"> Configure the sending of data to the server and the elimination of mobile data</h4>
+					<center><h3 data-localize="synchronize-manualSend" class="h3Title">MANUAL SENDING</h3>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-sinc-manual" class="addLabelPerf">Amount of data sent:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="sinc-manual">
+								<option value="300">300</option>
+								<option value="600">600</option>
+								<option value="1000">1000</option>
+								<option value="1500">1500</option>
+								<option value="2000">2000</option> 
+								<option value="3000">3000</option>
+								<option value="4000">4000</option>
+								<option value="5000">5000</option>
+								<option value="6500">6500</option>
+								<option value="8000" selected="selected">8000</option>
+								<option value="10000">10000</option>
+								<option value="15000">15000</option>
+								<option value="20000">20000</option>
+								<option data-localize="sistem_type_points-all" value="500000">All data</option>
+							</select>
+						</div>
+					</div>
+					<h3 data-localize="synchronize-manualDelete" class="h3Title">MANUAL DELETE</h3>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-delete-manual" class="addLabelPerf">Percentage of data to delete:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="delete-manual">
+								<option value="0" selected="selected">0%</option>
+								<option value="25">25%</option>
+								<option value="50">50%</option>
+								<option value="75">75%</option>
+								<option value="100">100%</option> 
+							</select>
+						</div>
+					</div>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-delete-device-manual" class="addLabelPerf">Data of device that you want delete:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="delete-device-manual">
+								<option data-localize="checkbox-accelerometer" value="Accel" selected="selected">Accelerometer</option>
+								<option data-localize="checkbox-compass" value="Comp">Compass</option>
+								<option data-localize="checkbox-gps" value="Geo">Geolocation</option>
+								<option data-localize="checkbox-activities" value="App">Activities</option>
+							</select>
+						</div>
+					</div>
+					<div id="btn_delete" class="buttonDelete" data-role="button">
+						<label data-localize="lbl_btn_delete" for="btn_delete">Delete</label> 
+					</div>
+					<h3 data-localize="synchronize-autoSend" class="h3Title">AUTOMATIC SENDING</h3>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-sinc-auto" class="addLabelPerf">Frequency of sending:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="sinc-auto">
+								<option data-localize="lbl-desactived" value="0">Desactived</option>
+								<option value="1" selected="selected">1 h</option>
+								<option value="2">2 h</option>
+								<option value="3">3 h</option>
+								<option value="6">6 h</option> 
+								<option value="9">9 h</option>
+								<option value="12">12 h</option>
+								<option value="18">18 h</option>
+								<option value="23">23 h</option>
+							</select>
+						</div>
+					</div>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-sinc-manual" class="addLabelPerf">Amount of data sent:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="sinc-autoData">
+								<option value="300">300</option>
+								<option value="600">600</option>
+								<option value="1000">1000</option>
+								<option value="1500">1500</option>
+								<option value="2000" selected="selected">2000</option> 
+								<option value="3000">3000</option>
+								<option value="4000">4000</option>
+								<option value="5000">5000</option>
+								<option value="6500">6500</option>
+								<option value="8000">8000</option>
+								<option value="10000">10000</option>
+								<option value="15000">15000</option>
+							</select>
+						</div>
+					</div>
+					<h3 data-localize="synchronize-autoDelete" class="h3Title">AUTOMATIC DELETE</h3>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-delete-freq-auto" class="addLabelPerf">Frequency of data erased:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="delete-freq-auto">
+								<option data-localize="lbl-desactived" value="0">Desactived</option>
+								<option data-localize="lbl-4days" value="4">4 days</option>
+								<option data-localize="lbl-7days" value="7">7 days</option>
+								<option data-localize="lbl-10days" value="10" selected="selected">10 days</option>
+								<option data-localize="lbl-15days" value="15">15 days</option>
+								<option data-localize="lbl-20days" value="20">20 days</option> 
+							</select>
+						</div>
+					</div>
+					<div class="ui-grid-a">
+						<div class="ui-block-a"> 
+							<h5 data-localize="lbl-delete-manual" class="addLabelPerf">Percentage of data to delete:</h5> 
+						</div>
+						<div class="ui-block-b">
+							<select id="delete-auto">
+								<option value="0" selected="selected">0%</option>
+								<option value="25">25%</option>
+								<option value="50">50%</option>
+								<option value="75">75%</option>
+								<option value="100">100%</option> 
+							</select>
+						</div>
+					</div>
+					</center>
+				</div>
+				
+				<div class="api-div" id="api-server">
+					<h2 data-localize="viewDataServer-title"><strong>Details server</strong></h2>
+					<h4 id="info_viewServer" data-localize="lbl-viewServer" class="help"> Table summary of data on the server</h4>
+					<center><table border="1">
+						<tr>
+							<td class="table_form_title_app2"><img src="../images/icono_device.png"></td>
+							<td data-localize="table-mobileUser" class="table_form_title_app1">Mobile</td>
+							<td data-localize="table-server" class="table_form_title_app1">Server</td>
+							<td class="table_form_title_app3"><div class="table_form_title_app3"><img src="../images/icono_upload.png"></div></td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="table_form_device"><img src="../images/icono_user.png"></td>
+							<td id="table_idMobileUser" class="table_form_device">-</td>
+							<td id="table_idServerUser" class="table_form_device">-</td>
+							<td rowspan="2" class="table_form_device">
+								<img id="table_ServerErrorUser" class="invisible" src="../images/icono_tick.png">
+								<center><div id="btn_sendUser" class="button invisible btn_upload"><img class="img_upload" src="../images/icono_upload1.png"></div></center>
+							</td>
+						</tr>
+						<tr>
+							<td id="table_nameMobileUser" class="table_form_device">-</td>
+							<td id="table_nameServerUser" class="table_form_device">-</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="table_form_device"><img src="../images/icono_accel.png"></td>
+							<td id="table_idMobileAccel" class="table_form_device">-</td>
+							<td id="table_idServerAccel" class="table_form_device">-</td>
+							<td rowspan="2" class="table_form_device">
+								<img id="table_ServerErrorAccel" class="invisible" src="../images/icono_tick.png">
+								<center><div id="btn_sendAccel" class="button invisible btn_upload"><img class="img_upload" src="../images/icono_upload1.png"></div></center>
+							</td>
+						</tr>
+						<tr>
+							<td id="table_dateMobileAccel" class="table_form_device">-</td>
+							<td id="table_dateServerAccel" class="table_form_device">-</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="table_form_device"><img src="../images/icono_comp.png"></td>
+							<td id="table_idMobileComp" class="table_form_device">-</td>
+							<td id="table_idServerComp" class="table_form_device">-</td>
+							<td rowspan="2" class="table_form_device">
+								<img id="table_ServerErrorComp" class="invisible" src="../images/icono_tick.png">
+								<center><div id="btn_sendComp" class="button invisible btn_upload"><img class="img_upload" src="../images/icono_upload1.png"></div></center>
+							</td>
+						</tr>
+						<tr>
+							<td id="table_dateMobileComp" class="table_form_device">-</td>
+							<td id="table_dateServerComp" class="table_form_device">-</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="table_form_device"><img src="../images/icono_gps.png"></td>
+							<td id="table_idMobileGeo" class="table_form_device">-</td>
+							<td id="table_idServerGeo" class="table_form_device">-</td>
+							<td rowspan="2" class="table_form_device">
+								<img id="table_ServerErrorGeo" class="invisible" src="../images/icono_tick.png">
+								<center><div id="btn_sendGeo" class="button invisible btn_upload"><img class="img_upload" src="../images/icono_upload1.png"></div></center>
+							</td>
+						</tr>
+						<tr>
+							<td id="table_dateMobileGeo" class="table_form_device">-</td>
+							<td id="table_dateServerGeo" class="table_form_device">-</td>
+						</tr>
+						<tr>
+							<td rowspan="2" class="table_form_device"><img src="../images/icono_app.png"></td>
+							<td id="table_idMobileApp" class="table_form_device">-</td>
+							<td id="table_idServerApp" class="table_form_device">-</td>
+							<td rowspan="2" class="table_form_device">
+								<img id="table_ServerErrorApp" class="invisible" src="../images/icono_tick.png">
+								<center><div id="btn_sendApp" class="button invisible btn_upload"><img class="img_upload" src="../images/icono_upload1.png"></div></center>
+							</td>
+						</tr>
+						<tr>
+							<td id="table_dateMobileApp" class="table_form_device">-</td>
+							<td id="table_dateServerApp" class="table_form_device">-</td>
+						</tr>
+					</table></center>
+					<h4 id="error_sendData" class="infoHideRed"></h4>
+				</div>
+			</div>
+			
+			<h4 data-localize="info_data" id="info_data" class="info info_down">The app is ready</h4>
+			<center><div id="btn_start" class="buttonStart" data-role="button">
+				<label data-localize="lbl_btn_start" id="lbl_btn_start" for="btn_start">Start</label> 
+			</div></center>
+		</div>
+		
+		<div id="footer_sinc" class="footer">
+			<table border="0">
+				<tr>	
+					<td class="table_sinc_data"><p id="lblFooter_synchronize"></p></td>
+					<td class="table_sinc_info"><img id="icono_help_sinc" src="../images/icono_help.png"></td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+	
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/accelerometer.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/compass.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/geolocation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/user.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/appMobile.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/synchronize.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphFunction.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphAccelerometer.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphAppMobile.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphCompass.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphGeolocation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/viewData.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/viewSynchronize.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/accelerometerDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/appMobileDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/compassDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/geolocationDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/traductionDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../persistence/userDB.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../communications/userConnect.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../communications/accelerometerConnect.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../communications/compassConnect.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../communications/geolocationConnect.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../communications/appMobileConnect.js"></script>
+	
+  </body>
+</HTML>
+

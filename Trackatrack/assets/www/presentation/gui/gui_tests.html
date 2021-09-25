@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<HTML>
+  <head>
+  	<meta http-equiv="Content-type" content="text/html; charset=utf-8;"/>
+
+  	<title>TRACKATRACK-Testing</title>
+	<link rel="stylesheet" href="../libs/tests/qunit-1.14.0.css" />  
+	<link rel="stylesheet" href="../libs/jquery.mobile/jquery.mobile.datebox.min.css" />   
+	
+	<script src="../libs/jquery.mobile/jquery-1.7.2.min"></script>
+	<script src="../libs/jquery.mobile/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/phonegap/cordova-2.3.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/jquery.mobile/jquery.mobile.datebox.calbox.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/controller/controller.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/tests/qunit-1.14.0.js"></script>
+  
+  <body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	
+	<div style="display:none;">
+		<input id="dateFromAccel" value=""/>
+		<input id="dateToAccel" value=""/>
+		<input id="hourFromAccel" type="number" maxlength="2" min="0" max="23"/>
+		<input id="hourToAccel" type="number" maxlength="2" min="0" max="23"/>
+		<input id="minFromAccel" type="number" maxlength="2" min="0" max="23"/>
+		<input id="minToAccel" type="number" maxlength="2" min="0" max="23"/>
+		<h3 id="fromAccel">-</h3>
+		<h3 id="toAccel">-</h3>
+		<select id="listHourAccel" name="listHourAccel">
+			<option data-localize="listHourAccel" value="-1" selected="selected">All hours</option>
+		</select>
+		<select id="listDateAccel" name="listDateAccel">
+			<option data-localize="listDateAccel" value="-1" selected="selected">Everyday</option>
+		</select>
+		<h5 id="infoDateAccel"></h5>
+	</div>
+	
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphFunction.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphAccelerometer.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphAppMobile.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphCompass.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/graph/graphGeolocation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../domain/apis/geolocation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../tests/testsGraphs.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../tests/testsGeolocation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../tests/testsApps.js"></script>
+  </body>
+</html>
